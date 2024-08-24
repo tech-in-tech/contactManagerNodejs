@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const app = express();
 const dotenv = require('dotenv')
 require('dotenv').config();
+const db = require('./config/db')
 
 // !Middlewares
 // * to access data rom clint in JSON formate
@@ -19,6 +20,8 @@ app.use(morgan('dev'));
 
 // !ROUTE
 // *URL => http://localhost:5000
+app.use('/api/v1/test',require('./routes/testRoute'))
+app.use('/api/v1/contact',require('./routes/contactRoutes'))
 
 // !PORT
 const PORT = process.env.PORT || 5000
