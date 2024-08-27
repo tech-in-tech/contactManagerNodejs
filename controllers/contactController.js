@@ -124,4 +124,37 @@ const updateContactController = async(req,res)=>{
   }
 }
 
-module.exports = {createContactController,getAllContactController,getContactByIdController,updateContactController}
+// Delete Contact | DELETE
+const deleteContactController = async(req,res)=>{
+  try {
+    const contactId = req.params.id;
+    if(!contactId){
+      return res.status(404).send({
+        success:false,
+        message:"Provide Contact Id"
+      })
+    }
+    const contact = await contactModel.findById(contactId);
+    if(!contactId){
+      return  res.status(404).send({
+        success:false,
+        message:"Contact Not Found",
+        error
+      })
+    }
+    await contactModel.findByIdAndDelete(contactId);
+    res.status(200).send({
+      success:true,
+      message:"Contact Deleted Successfully"
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success:false,
+      message:"Error in delete contact {deleteContactController} API",
+      error
+    })
+  }
+}
+
+module.exports = {createContactController,getAllContactController,getContactByIdController,updateContactController,deleteContactController}

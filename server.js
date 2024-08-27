@@ -22,6 +22,7 @@ app.use(morgan('dev'));
 // *URL => http://localhost:5000
 app.use('/api/v1/test',require('./routes/testRoute'))
 app.use('/api/v1/contact',require('./routes/contactRoutes'))
+app.use('/api/v1/auth',require("./routes/authRoutes"))
 
 // !PORT
 const PORT = process.env.PORT || 5000
