@@ -5,9 +5,9 @@ const JWT= require('jsonwebtoken')
 // * Register | POST
 const registerController = async(req,res)=>{
   try {
-    const {userName,email,password,phone,gender} = req.body;
+    const {userName,email,password,phone} = req.body;
     // *validation
-    if(!userName || !email || !password || !phone || !gender){
+    if(!userName || !email || !password || !phone){
       return res.status(500).send({
         success:false,
         message:"Please Provide all field"
@@ -29,14 +29,13 @@ const registerController = async(req,res)=>{
     const user = await userModel.create({
       userName,
       email,
-      gender,
       password : hashedPassword,
       phone,
     })
     res.status(201).send({
       success:true,
       message:"Successfully Registered",
-      user
+      user:user
     })
   } catch (error) {
     console.log(error);
